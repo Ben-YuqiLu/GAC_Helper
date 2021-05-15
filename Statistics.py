@@ -71,10 +71,12 @@ def ProcessData():
     # Sorted() has a implicit conversion from {token length: count} -> [(token length, count)]
     len_unique_cre = sorted(len_unique_cre.items())
     len_unique_aca = sorted(len_unique_aca.items())
-    return [len_unique_aca, len_unique_cre]
+    len_list_aca = sorted(len_list_aca)
+    len_list_cre = sorted(len_list_cre)
+    return [len_unique_aca, len_unique_cre, len_list_aca, len_list_cre]
 
 
-def LoadGraphs(len_unique_aca, len_unique_cre):
+def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # Load Bar Graphs
     x_values_1, y_values_1, x_values_2, y_values_2 = [], [], [], []
     for token_len, freq in len_unique_aca:
@@ -127,17 +129,19 @@ def LoadGraphs(len_unique_aca, len_unique_cre):
 
     # Load Box and Whisker Diagram
     plt.figure(4)
-    plt.boxplot(y_values_1)
+    plt.boxplot(len_list_aca)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     plt.title("The Box Plot for the Academic Writing Sample.")
     plt.figure(5)
-    plt.boxplot(y_values_2)
+    plt.boxplot(len_list_cre)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     plt.title("The Box Plot for the Creative Writing Sample.")
 
     # DEBUG USE ONLY
+    print(len_list_aca)
+    print(len_list_cre)
     print(len_unique_aca)
     print(len_unique_cre)
     print(y_values_1)
@@ -163,12 +167,22 @@ def LoadGraphs(len_unique_aca, len_unique_cre):
     for token_len, freq in len_unique_aca:
         fsq_2.append(freq * (token_len - mean_2) ** 2)
     sd_2 = math.sqrt(sum(fsq_2) / sum(y_values_2))
-
+    if len(len_list_aca) % 2 == 0:  # if even
+        median_1 = (len_list_aca[int(len(len_list_aca) / 2 - 1) - 1] + len_list_aca[
+                    int(len(len_list_aca) / 2 + 1) - 1]) / 2
+    else:  # if odd
+        median_1 = len_list_aca[int(len(len_list_aca) / 2) - 1]
+    if len(len_list_cre) % 2 == 0:  # if even
+        median_2 = (len_list_cre[int(len(len_list_cre) / 2 - 1) - 1] + len_list_cre[
+                    int(len(len_list_cre) / 2 + 1) - 1]) / 2
+    else:  # if odd
+        median_2 = len_list_cre[int(len(len_list_cre) / 2) - 1]
     # Copy the results to the clipboard
     pyperclip.copy("Academic Source Data:" + "\nMean = " + str(mean_1) + "\nStandard Deviation = " + str(sd_1) +
                    "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
                    "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) + "\n\n"
-                   "Creative Writing Source Data:" + "\nMean = " + str(mean_2) +
+                                                                     "Creative Writing Source Data:" + "\nMean = " + str(
+        mean_2) +
                    "\nStandard Deviation = " + str(sd_2) +
                    "\nMedian = " + str(median_2) + "\nQ1 = " + str(Q1_2) +
                    "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2)
@@ -189,7 +203,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre):
     ]
     layout = [
         [sg.Column(column1), sg.VSeperator(), sg.Column(column2)],
-        [sg.Text("Result Copied in Clipboard!", text_color="yellow")],
+        [sg.Text("Result Copied to Clipboard!", text_color="yellow")],
     ]
 
     window2 = sg.Window("GAC Helper", layout)
@@ -222,4 +236,5 @@ creTokens = []
 
 if __name__ == '__main__':
     RunPage1()
-    LoadGraphs(ProcessData()[0], ProcessData()[1])
+    data = ProcessData()
+    LoadGraphs(data[0], data[1], data[2], data[3])
