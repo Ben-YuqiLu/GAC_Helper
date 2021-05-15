@@ -151,8 +151,8 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # print(y_values_2)
     # print(cumulative_freq_1)
     # print(cumulative_freq_2)
-    print(acaTokens)
-    print(creTokens)
+    # print(acaTokens)
+    # print(creTokens)
     plt.show()
 
     # Calculate mean sd median Q1 Q3 IQR
@@ -191,8 +191,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     pyperclip.copy("Academic Source Data:" + "\nMean = " + str(mean_1) + "\nStandard Deviation = " + str(sd_1) +
                    "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
                    "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) + "\n\n"
-                                                                     "Creative Writing Source Data:" + "\nMean = " + str(
-        mean_2) +
+                   "Creative Writing Source Data:" + "\nMean = " + str(mean_2) +
                    "\nStandard Deviation = " + str(sd_2) +
                    "\nMedian = " + str(median_2) + "\nQ1 = " + str(Q1_2) +
                    "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2)
