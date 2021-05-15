@@ -135,12 +135,12 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     plt.boxplot(len_list_aca)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
-    plt.title("The Box Plot for the Academic Writing Sample.")
+    plt.title("The Box Plot for the Academic Writing Sample")
     plt.figure(5)
     plt.boxplot(len_list_cre)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
-    plt.title("The Box Plot for the Creative Writing Sample.")
+    plt.title("The Box Plot for the Creative Writing Sample")
 
     # DEBUG USE ONLY
     # print(len_list_aca)
