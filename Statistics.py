@@ -53,7 +53,6 @@ def ProcessData():
     len_unique_aca = {}
     len_unique_cre = {}
 
-    # TODO: Fix Counting Error (+1)
     # Data Processing -> {token length: count} * 2
     for tokens in acaTokens:
         if tokens != "":
