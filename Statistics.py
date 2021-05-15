@@ -140,14 +140,15 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     plt.title("The Box Plot for the Creative Writing Sample.")
 
     # DEBUG USE ONLY
-    print(len_list_aca)
-    print(len_list_cre)
-    print(len_unique_aca)
-    print(len_unique_cre)
-    print(y_values_1)
-    print(y_values_2)
-    print(cumulative_freq_1)
-    print(cumulative_freq_2)
+    # print(len_list_aca)
+    # print(len_list_cre)
+    # print(len_unique_aca)
+    # print(len_unique_cre)
+    # print(y_values_1)
+    # print(y_values_2)
+    # print(cumulative_freq_1)
+    # print(cumulative_freq_2)
+    
     plt.show()
 
     # Calculate mean sd median Q1 Q3 IQR
