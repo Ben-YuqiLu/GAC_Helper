@@ -1,5 +1,6 @@
 import sys
 import math
+import numpy as np
 import pyperclip
 import PySimpleGUI as sg
 import matplotlib.pyplot as plt
@@ -170,20 +171,12 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     for token_len, freq in len_unique_aca:
         fsq_2.append(freq * (token_len - mean_2) ** 2)
     sd_2 = math.sqrt(sum(fsq_2) / sum(y_values_2))
-    if len(len_list_aca) % 2 == 0:  # if even
-        median_1 = (len_list_aca[int(len(len_list_aca) / 2 - 1) - 1] + len_list_aca[
-            int(len(len_list_aca) / 2 + 1) - 1]) / 2
-    else:  # if odd
-        median_1 = len_list_aca[int(len(len_list_aca) / 2) - 1]
-    if len(len_list_cre) % 2 == 0:  # if even
-        median_2 = (len_list_cre[int(len(len_list_cre) / 2 - 1) - 1] + len_list_cre[
-            int(len(len_list_cre) / 2 + 1) - 1]) / 2
-    else:  # if odd
-        median_2 = len_list_cre[int(len(len_list_cre) / 2) - 1]
-    Q1_1 = len_list_cre[int((len(len_list_aca) + 1) / 4)]
-    Q1_2 = len_list_cre[int((len(len_list_cre) + 1) / 4)]
-    Q3_1 = len_list_cre[int((3 * (len(len_list_aca) + 1)) / 4)]
-    Q3_2 = len_list_cre[int((3 * (len(len_list_cre) + 1)) / 4)]
+    median_1 = np.percentile(len_list_aca, 50)
+    median_2 = np.percentile(len_list_cre, 50)
+    Q1_1 = np.percentile(len_list_aca, 25)
+    Q1_2 = np.percentile(len_list_cre, 25)
+    Q3_1 = np.percentile(len_list_aca, 75)
+    Q3_2 = np.percentile(len_list_cre, 75)
     IQR_1 = Q3_1 - Q1_1
     IQR_2 = Q3_2 - Q1_2
 
