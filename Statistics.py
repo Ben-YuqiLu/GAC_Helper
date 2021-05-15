@@ -153,8 +153,6 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # Calculate mean sd median Q1 Q3 IQR
     Xf_1, fsq_1 = [], []
     Xf_2, fsq_2 = [], []
-    mean_1, sd_1, median_1, Q1_1, Q3_1, IQR_1 = 0, 0, 0, 0, 0, 0
-    mean_2, sd_2, median_2, Q1_2, Q3_2, IQR_2 = 0, 0, 0, 0, 0, 0
     for token_len, freq in len_unique_aca:
         Xf_1.append(token_len * freq)
     mean_1 = sum(Xf_1) / sum(y_values_1)
@@ -169,14 +167,21 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     sd_2 = math.sqrt(sum(fsq_2) / sum(y_values_2))
     if len(len_list_aca) % 2 == 0:  # if even
         median_1 = (len_list_aca[int(len(len_list_aca) / 2 - 1) - 1] + len_list_aca[
-                    int(len(len_list_aca) / 2 + 1) - 1]) / 2
+            int(len(len_list_aca) / 2 + 1) - 1]) / 2
     else:  # if odd
         median_1 = len_list_aca[int(len(len_list_aca) / 2) - 1]
     if len(len_list_cre) % 2 == 0:  # if even
         median_2 = (len_list_cre[int(len(len_list_cre) / 2 - 1) - 1] + len_list_cre[
-                    int(len(len_list_cre) / 2 + 1) - 1]) / 2
+            int(len(len_list_cre) / 2 + 1) - 1]) / 2
     else:  # if odd
         median_2 = len_list_cre[int(len(len_list_cre) / 2) - 1]
+    Q1_1 = len_list_cre[int((len(len_list_aca) + 1) / 4)]
+    Q1_2 = len_list_cre[int((len(len_list_cre) + 1) / 4)]
+    Q3_1 = len_list_cre[int((3 * (len(len_list_aca) + 1)) / 4)]
+    Q3_2 = len_list_cre[int((3 * (len(len_list_cre) + 1)) / 4)]
+    IQR_1 = Q3_1 - Q1_1
+    IQR_2 = Q3_2 - Q1_2
+
     # Copy the results to the clipboard
     pyperclip.copy("Academic Source Data:" + "\nMean = " + str(mean_1) + "\nStandard Deviation = " + str(sd_1) +
                    "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
