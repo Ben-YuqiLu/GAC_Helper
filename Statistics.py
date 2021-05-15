@@ -54,7 +54,6 @@ def ProcessData():
     len_unique_cre = {}
 
     # TODO: Fix Counting Error (+1)
-    # TODO: Fix Random "" Strings Bug in acaToken and creToken
     # Data Processing -> {token length: count} * 2
     for tokens in acaTokens:
         if tokens != "":
