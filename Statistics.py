@@ -53,11 +53,14 @@ def ProcessData():
     len_unique_cre = {}
 
     # TODO: Fix Counting Error (+1)
+    # TODO: Fix Random "" Strings Bug in acaToken and creToken
     # Data Processing -> {token length: count} * 2
     for tokens in acaTokens:
-        len_list_aca.append(len(tokens))
+        if tokens != "":
+            len_list_aca.append(len(tokens))
     for tokens in creTokens:
-        len_list_cre.append(len(tokens))
+        if tokens != "":
+            len_list_cre.append(len(tokens))
     for tok_len in len_list_aca:
         if tok_len in len_unique_aca:
             len_unique_aca[tok_len] += 1
@@ -148,7 +151,8 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # print(y_values_2)
     # print(cumulative_freq_1)
     # print(cumulative_freq_2)
-
+    print(acaTokens)
+    print(creTokens)
     plt.show()
 
     # Calculate mean sd median Q1 Q3 IQR
