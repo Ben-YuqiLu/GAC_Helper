@@ -148,7 +148,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # print(y_values_2)
     # print(cumulative_freq_1)
     # print(cumulative_freq_2)
-    
+
     plt.show()
 
     # Calculate mean sd median Q1 Q3 IQR
