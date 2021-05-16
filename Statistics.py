@@ -113,7 +113,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
         if index == 0:
             cumulative_freq_2.append(freq)
         else:
-            cumulative_freq_2.append(cumulative_freq_1[index - 1] + freq)
+            cumulative_freq_2.append(cumulative_freq_2[index - 1] + freq)
     plt.figure(2)
     plt.plot(x_values_1, cumulative_freq_1)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -185,7 +185,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
                    "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
                    "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) +
                    "\nSkewness = " + str(skewness_1) + "\n\n"
-                   "Creative Writing Source Data:" + "\nMean = " + str(mean_2) +
+                                                       "Creative Writing Source Data:" + "\nMean = " + str(mean_2) +
                    "\nStandard Deviation = " + str(sd_2) +
                    "\nMedian = " + str(median_2) + "\nQ1 = " + str(Q1_2) +
                    "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2) +
