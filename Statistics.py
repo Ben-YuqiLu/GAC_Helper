@@ -154,7 +154,7 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     # print(creTokens)
     plt.show()
 
-    # Calculate mean sd median Q1 Q3 IQR
+    # Calculate mean sd median Q1 Q3 IQR Skewness
     Xf_1, fsq_1 = [], []
     Xf_2, fsq_2 = [], []
     for token_len, freq in len_unique_aca:
@@ -177,15 +177,19 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
     Q3_2 = np.percentile(len_list_cre, 75)
     IQR_1 = Q3_1 - Q1_1
     IQR_2 = Q3_2 - Q1_2
+    skewness_1 = (3 * (mean_1 - median_1)) / sd_1
+    skewness_2 = (3 * (mean_2 - median_2)) / sd_2
 
     # Copy the results to the clipboard
     pyperclip.copy("Academic Source Data:" + "\nMean = " + str(mean_1) + "\nStandard Deviation = " + str(sd_1) +
                    "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
-                   "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) + "\n\n"
+                   "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) +
+                   "\nSkewness = " + str(skewness_1) + "\n\n"
                    "Creative Writing Source Data:" + "\nMean = " + str(mean_2) +
                    "\nStandard Deviation = " + str(sd_2) +
                    "\nMedian = " + str(median_2) + "\nQ1 = " + str(Q1_2) +
-                   "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2)
+                   "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2) +
+                   "\nSkewness = " + str(skewness_2)
                    )
 
     # Create Output Window
@@ -193,13 +197,15 @@ def LoadGraphs(len_unique_aca, len_unique_cre, len_list_aca, len_list_cre):
         [sg.Text("Academic Source Data:")],
         [sg.Text("Mean = " + str(mean_1) + "\nStandard Deviation = " + str(sd_1) +
                  "\nMedian = " + str(median_1) + "\nQ1 = " + str(Q1_1) +
-                 "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1))]
+                 "\nQ3 = " + str(Q3_1) + "\nIQR = " + str(IQR_1) +
+                 "\nSkewness = " + str(skewness_1))]
     ]
     column2 = [
         [sg.Text("Creative Writing Source Data:")],
         [sg.Text("Mean = " + str(mean_2) + "\nStandard Deviation = " + str(sd_2) +
                  "\nMedian = " + str(median_2) + "\nQ1 = " + str(Q1_2) +
-                 "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2))]
+                 "\nQ3 = " + str(Q3_2) + "\nIQR = " + str(IQR_2) +
+                 "\nSkewness = " + str(skewness_2))]
     ]
     layout = [
         [sg.Column(column1), sg.VSeperator(), sg.Column(column2)],
